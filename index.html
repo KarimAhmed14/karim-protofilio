@@ -110,7 +110,16 @@
     padding:8px 14px; border-radius:99px; font-size:13px; font-weight:600; color:#fff;
     background:linear-gradient(135deg,var(--pink),var(--indigo)); box-shadow:0 10px 30px -10px rgba(236,72,153,.6);
   }
-  @media (max-width:780px){ .nav-links a:not(.nav-cta){ display:none } }
+  .nav-burger{
+    display:none; width:38px; height:38px; border-radius:10px;
+    background:rgba(255,255,255,.04); border:1px solid var(--line);
+    align-items:center; justify-content:center; flex-direction:column; gap:4px;
+    cursor:none;
+  }
+  .nav-burger span{ display:block; width:18px; height:2px; background:var(--text); border-radius:2px; transition:transform .3s ease, opacity .3s ease; }
+  .nav-burger.open span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+  .nav-burger.open span:nth-child(2){ opacity:0; }
+  .nav-burger.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
 
   /* ==== Layout ==== */
   main{ position:relative; z-index:1; }
@@ -414,6 +423,118 @@
   }
   footer b{ color:var(--pink); }
 
+  /* ==== Mobile (≤780px) ==== */
+  @media (max-width:780px){
+    section{ padding:80px 20px; }
+    .nav{ width:calc(100vw - 24px); top:12px; padding:12px 16px; border-radius:14px; }
+    .logo{ font-size:16px; }
+
+    /* Mobile dropdown menu */
+    .nav-burger{ display:flex; }
+    .nav-links{
+      position:absolute; top:calc(100% + 10px); right:0; left:0;
+      flex-direction:column; gap:0; padding:14px;
+      background:rgba(10,11,26,.92); border:1px solid var(--line);
+      backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%);
+      border-radius:14px;
+      transform:translateY(-10px); opacity:0; pointer-events:none;
+      transition:transform .3s ease, opacity .3s ease;
+    }
+    .nav-links.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
+    .nav-links a{
+      display:block; width:100%; padding:14px 12px; font-size:15px;
+      border-bottom:1px solid var(--line);
+    }
+    .nav-links a:last-child{ border-bottom:none; }
+    .nav-links a::after{ display:none; }
+    .nav-cta{
+      margin-top:6px; text-align:center; color:#fff !important;
+    }
+
+    /* Hero */
+    .hero{ padding-top:120px; padding-bottom:50px; gap:36px; }
+    .hero h1{ letter-spacing:-2px; }
+    .hero .lede{ font-size:15px; }
+    .cta-row .btn{ padding:12px 18px; font-size:13px; flex:1; justify-content:center; min-width:140px; }
+    .hero-card-wrap{ height:420px; }
+    .orb{ width:340px; height:340px; }
+    .ring-dashed{ width:300px; height:300px; }
+    .ring-dashed.inner{ width:230px; height:230px; }
+    .hero-card{ padding:22px; }
+    .avatar{ width:70px; height:70px; font-size:28px; }
+    .stats{ gap:6px; }
+    .stat{ padding:8px 4px; }
+    .stat .num{ font-size:17px; }
+    .stat .lbl{ font-size:9px; letter-spacing:1px; }
+
+    /* Marquee */
+    .marquee{ padding:18px 0; margin-top:20px; }
+    .marquee-track{ gap:36px; }
+    .marquee-track span{ font-size:16px; gap:36px; }
+
+    /* Skills */
+    .skills-wrap{ gap:32px; margin-top:36px; }
+    .skill-head{ font-size:13px; }
+    .chip{ padding:8px 14px; font-size:12px; }
+
+    /* Timeline */
+    .timeline{ padding-left:24px; margin-top:36px; }
+    .timeline::before{ left:8px; }
+    .tl-item{ padding:18px 18px; margin-bottom:18px; }
+    .tl-item::before{ left:-22px; top:24px; width:12px; height:12px; }
+    .tl-item:hover{ transform:none; } /* no shifting on touch */
+    .tl-title{ font-size:17px; }
+    .tl-date{ font-size:11px; letter-spacing:1px; }
+    .tl-desc{ font-size:14px; }
+
+    /* Projects */
+    .projects{ margin-top:36px; gap:16px; }
+    .proj{ padding:22px; }
+    .proj h3{ font-size:18px; }
+    .proj p{ font-size:13.5px; }
+    .proj:hover{ transform:none; }
+
+    /* Education */
+    .edu-grid{ margin-top:36px; gap:16px; }
+    .edu{ padding:22px; }
+    .edu .institution{ font-size:17px; }
+    .edu:hover{ transform:none; }
+    .lang-row{ margin-top:24px; }
+    .lang{ padding:16px 18px; }
+    .lang .name{ font-size:16px; }
+
+    /* Contact */
+    .contact{ gap:36px; margin-top:36px; }
+    .c-card{ padding:16px 18px; gap:14px; }
+    .c-card:hover{ transform:none; }
+    .c-icon{ width:42px; height:42px; flex-basis:42px; font-size:19px; border-radius:10px; }
+    .c-body .val{ font-size:13.5px; word-break:break-word; }
+    .contact-right{ height:340px; }
+    .avatar-big{ width:150px; height:150px; font-size:54px; }
+    .rr{ width:140px; height:140px; }
+
+    footer{ padding:30px 20px; font-size:12px; }
+  }
+
+  /* ==== Small phones (≤420px) ==== */
+  @media (max-width:420px){
+    section{ padding:64px 16px; }
+    .nav{ padding:10px 14px; }
+    .hero{ padding-top:110px; }
+    .hero-card-wrap{ height:380px; }
+    .hero-card{ width:min(300px,90vw); padding:20px; }
+    .stat .num{ font-size:15px; }
+    .cta-row{ flex-direction:column; }
+    .cta-row .btn{ width:100%; }
+    .section-title{ letter-spacing:-1px; }
+    .marquee-track span{ font-size:14px; gap:28px; }
+    .marquee-track{ gap:28px; }
+    .avatar-big{ width:130px; height:130px; font-size:46px; }
+    .rr{ width:120px; height:120px; }
+    .contact-right{ height:300px; }
+    .tl-row{ flex-direction:column; gap:6px; }
+  }
+
   /* ==== Accessibility ==== */
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
@@ -442,13 +563,16 @@
 <!-- NAV -->
 <nav class="nav">
   <a href="#top" class="logo">Karim<span>.</span>Albaqri</a>
-  <div class="nav-links">
+  <div class="nav-links" id="navLinks">
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#education">Education</a>
     <a href="#contact" class="nav-cta">Let's talk</a>
   </div>
+  <button class="nav-burger" id="navBurger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <main id="top">
@@ -1049,6 +1173,14 @@
   }
   tick();
 
+  /* ===== Mobile burger menu ===== */
+  const burger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
   /* ===== Smooth scroll ===== */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
@@ -1058,6 +1190,9 @@
         if (t){
           e.preventDefault();
           window.scrollTo({ top: t.offsetTop - 40, behavior:'smooth' });
+          // close mobile menu after tapping a link
+          burger.classList.remove('open');
+          navLinks.classList.remove('open');
         }
       }
     });
